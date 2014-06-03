@@ -29,6 +29,11 @@ Rails.application.routes.draw do
   #       get 'sold'
   #     end
   #   end
+  resources :managements do
+    collection do
+      get 'classes_manage'
+    end
+  end
 
   # Example resource route with sub-resources:
   #   resources :products do

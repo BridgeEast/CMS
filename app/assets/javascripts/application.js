@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require ext-all-debug
+//= require menus/hoverIntent
+//= require menus/superfish
+//= require menus/index
