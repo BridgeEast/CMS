@@ -11,6 +11,11 @@
   <%= render "layouts/menus"%> |
   <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
   <%= link_to('修改密码', edit_registration_path(:user)) %>
+  <br/>
+  <script>
+    Ext.onReady(function(){
+    });
+  </script>
 <% end %>
 <%= yield %>
 
