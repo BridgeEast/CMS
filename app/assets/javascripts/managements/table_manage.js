@@ -29,6 +29,7 @@ tableManage = {
             items: [{ 
                 text: '删除',
                 scope: this,
+                iconCls: Wando.icons.deletes,
                 handler: function(){ 
                     this.deleteCourse();
                 }
@@ -40,7 +41,7 @@ tableManage = {
             fields: ['id', 'number', 'time', 'teacher', 'quantity', 'multimedia'],
             proxy: {
                 type: 'ajax',
-                url: '/managements/get_course_for_grid.json',
+                url: '/managements/get_course_table_for_grid.json',
                 reader: {
                     type: 'json',
                     root: 'result'
@@ -49,7 +50,7 @@ tableManage = {
         });
 
         return Ext.create('Ext.grid.Panel', { 
-            anchor: '100% 65%',
+            anchor: '100% 75%',
             columns: cm,
             store: store,
             id: 'courseGrid',
@@ -64,6 +65,7 @@ tableManage = {
             items: [{ 
                 text: '添加',
                 scope: this,
+                iconCls: Wando.icons.add,
                 handler: function(){ 
                     var form = Ext.getCmp('courseForm').getForm();
                     if(form.isValid()){ 
@@ -76,7 +78,7 @@ tableManage = {
             }]
         });
         return Ext.create('Ext.form.Panel', { 
-            anchor: '100% 35%',
+            anchor: '100% 25%',
             title: '课表信息',
             frame: true,
             id: 'courseForm',
@@ -85,27 +87,133 @@ tableManage = {
         })
     },
 
+    createClass: function(){ 
+        return Ext.create('Ext.data.Store', { 
+            fields: ['id', 'number'],
+            proxy: { 
+                type: 'ajax',
+                url: '/managements/get_classes_for_grid.json',
+                reader: { 
+                    type: 'json',
+                    root: 'result'
+                }
+            }
+        });
+    },
+
+    createCourse: function(){ 
+        return Ext.create('Ext.data.Store', { 
+            fields: ['id', 'name'],
+            proxy: { 
+                type: 'ajax',
+                url: '/managements/get_course_for_grid.json',
+                reader: { 
+                    type: 'json',
+                    root: 'result'
+                }
+            }
+        });
+    },
+
+    createWeek: function(){ 
+        return Ext.create('Ext.data.Store', { 
+            fields: ['week'],
+            data: [{week: '1' },{ week: '2' },{ week: '3' }, { week: '4' }, { week: '5' }, { week: '6' }, { week: '7' }, { week: '8' }, { week: '9' }, { week: '10' }, { week: '11' }, { week: '12' }, { week: '13' }, { week: '14' }, { week: '15' }, { week: '16' }, { week: '17' }, { week: '18' }]
+        });
+    },
+
+    createDate: function(){ 
+        return Ext.create('Ext.data.Store', { 
+            fields: ['date'],
+            data: [{ date: '星期一' }, { date: '星期二' }, { date: '星期三' }, { date: '星期四' }, { date: '星期五' }, { date: '星期六' }, { date: '星期日' }]
+        });
+    },
+
+    createHour: function(){ 
+        var store = Ext.create('Ext.data.Store', { 
+            fields: ['hour'],
+            data: [{ hour:'1' }, { hour:'2' }, { hour:'3' }, { hour:'4' }, { hour:'5' }, { hour:'6' }, { hour:'7' }, { hour:'8' }, { hour:'9' }, { hour:'10'}]
+        });
+        var grid = Ext.create('Ext.grid.Panel', { 
+            columns: [{ 
+                text: '节次',
+                dataIndex: 'hour'
+            }],
+            store: store,
+            forceFit: true,
+            selModel: Ext.create('Ext.selection.CheckboxModel'),
+        });
+        var tbar = Ext.create('Ext.toolbar.Toolbar', { 
+            items: [{ 
+                text: '确定',
+                iconCls: Wando.icons.check,
+                scope: this,
+                handler: function(){ 
+                }
+            }] 
+        });
+        return Ext.create('Ext.window.Window', { 
+            title: '选择节次',
+            height: 200,
+            width: 200,
+            layout: 'fit',
+            animateTarget: 'hour',
+            items: [grid],
+            tbar: tbar
+        });
+    },
+
     createFormItem: function(){ 
         return { 
             xtype: 'fieldcontainer',
             layout: 'column',
             defaults: { 
-                columnWidth: .25,
-                xtype: 'textfield',
+                columnWidth: .16,
+                xtype: 'combo',
                 labelAlign: 'right',
                 allowBlank: false
             },
             items: [{ 
                 fieldLabel: '教室编号',
-                name: 'time'
+                name: 'class_info_id',
+                displayField: 'number',
+                valueField: 'id',
+                store: this.createClass()
             }, { 
                 fieldLabel: '课程名称',
-                name: 'teacher_id'
+                name: 'course_id',
+                displayField: 'name',
+                valueField: 'id',
+                store: this.createCourse()
             }, { 
-                fieldLabel: '教室编号',
-                name: 'quantity'
+                fieldLabel: '起始周',
+                name: 'week_s',
+                displayField: 'week',
+                valueField: 'week',
+                store: this.createWeek()
+            }, {  
+                fieldLabel: '结束周',
+                displayField: 'week',
+                valueField: 'week',
+                store: this.createWeek()
             }, { 
-                fieldLabel: '上课时间'
+                fieldLabel: '星期',
+                xtype: 'textfield',
+                id: 'week',
+                emptyText: "请选择",
+                    listeners: { 
+                    scope: this,
+                    focus: function(){ this.createDate().show() }
+                }
+            }, { 
+                fieldLabel: '节次',
+                xtype: 'textfield',
+                id: 'hour',
+                emptyText: "请选择",
+                    listeners: { 
+                    scope: this,
+                    focus: function(){ this.createHour().show() }
+                }
             }]
         }
     },

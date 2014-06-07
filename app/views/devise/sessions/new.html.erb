@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+<body>
+  <div id="logo">
+    <%= image_tag "login/logo_hzschool.png" %>
+  </div>
+  <div class="login">
+    <span class="login">
+      <span class="f24">用户登录</span>
+      <hr/>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <table class="f12">
+        <tr>
+          <td><%= f.label :email %></td>
+          <td><%= f.email_field :email, autofocus: true %></td>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr>
+          <td><%= f.label :password %></td>
+          <td><%= f.password_field :password, autocomplete: "off" %></td>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr>
+          <% if devise_mapping.rememberable? -%>
+          <td><%= f.check_box :remember_me %> <%= f.label :remember_me %></td>
+          <% end -%>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr>
+				  <td colspan="2">
+				  	<input type="radio" name="userType">部门
+				  	<input type="radio" name="userType">教师
+				  	<input type="radio" name="userType">学生
+				  	<input type="radio" name="userType">访客
+				  </td>
+				
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr>
+          <td><%= f.submit "登录" %></td>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr>
+          <td><%= render "devise/shared/links" %></td>
+        </tr>
+      </table>
+      
+      <% end %>
+  </div>
+  <div id="footer">
+		<span>
+			&copy;2014-2020  <a href="#">11软件工程1班14#414股份有限公司</a><br>
+	    	<span>
+	    		版权所有
+	    	</span>
+	    	&nbsp;&nbsp;联系电话：1882486****
+		</span>
+	</div>
+</body>
+</html>

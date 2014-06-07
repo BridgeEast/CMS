@@ -1,0 +1,140 @@
+/* extjs button image */
+.add { 
+  background-image:url(icon/add.png) !important;
+}
+
+.table_row_delete { 
+  background-image:url(icon/table_row_delete.png) !important;
+}
+
+.delete { 
+  background-image:url(icon/delete.png) !important;
+}
+
+.check{ 
+  background-image:url(icon/check.png) !important;
+}
+
+.table_edit{ 
+  background-image:url(icon/table_edit.png) !important;
+}
+
+.save{ 
+  background-image:url(icon/save.gif) !important;
+}
+
+.error{ 
+  background-image:url(icon/error.png) !important;
+}
+
+.magnifier{ 
+  background-image:url(icon/magnifier.png) !important;
+}
+
+.pencil_delete{ 
+  background-image:url(icon/pencil_delete.png) !important;
+}
+
+.paintbrush{ 
+  background-image:url(icon/paintbrush.png) !important;
+}
+
+.table_refresh{ 
+  background-image:url(icon/table_refresh.png) !important;
+}
+
+.database{ 
+  background-image:url(icon/database.png) !important;
+}
+
+.print{ 
+  background-image:url(/lib/images/icon/printer.png) !important;
+}
+
+.calculator {
+    background-image: url(/lib/images/icon/calculator.png) !important;
+}
+
+.options {
+    background-image: url(/lib/images/icon/options.png) !important;
+}
+
+.import {
+    background-image: url(/lib/images/icon/import.png) !important;
+}
+
+.icon-prev
+{
+    background: url(/lib/images/icon/arrow_left.png) no-repeat center center !important;
+}
+
+.icon-next
+{
+    background: url(/lib/images/icon/arrow_right.png) no-repeat center center !important;
+}
+
+.user {
+    background-image: url(/lib/images/icon/user.png) !important;
+}
+
+.expand {
+    background-image: url(/lib/images/icon/expand.png) !important;
+}
+.copy {
+    background-image: url(/lib/images/icon/copy.ico) !important;
+    background-size: 16px;
+}
+.excel {
+    background-image: url(/lib/images/icon/grid.png) !important;
+}
+.error { 
+    background-image: url(/lib/images/icon/error.png) !important;
+}
+.finish { 
+    background-image: url(/lib/images/icon/emoticon_happy.png) !important;
+}
+.upload { 
+    background-image: url(/lib/images/icon/image_add.png) !important;
+}
+.grid { 
+    background-image: url(/lib/images/icon/grid.png) !important;
+}
+.table_refresh { 
+    background-image: url(/lib/images/icon/table_refresh.png) !important;
+}
+.shopping_cart { 
+    background-image: url(/lib/images/icon/shopping_cart1.png) !important;
+}
+.pictures { 
+    background-image: url(/lib/images/icon/pictures.png) !important;
+}
+.warning { 
+    background-image: url(/lib/images/icon/warning.png) !important;
+}
+.inbound { 
+    background-image: url(/lib/images/icon/inbound.png) !important;
+}
+.undo { 
+    background-image: url(/lib/images/icon/undo.png) !important;
+}
+.message { 
+    background-image: url(/lib/images/icon/message.png) !important;
+}
+.lorry { 
+    background-image: url(/lib/images/icon/lorry.png) !important;
+}
+.cross { 
+    background-image: url(/lib/images/icon/cross.png) !important;
+}
+.detail { 
+    background-image: url(/lib/images/icon/detail.png) !important;
+}
+.hide { 
+    background-image: url(/lib/images/icon/hide.png) !important;
+}
+.orders { 
+    background-image: url(/lib/images/icon/orders.png) !important;
+}
+.clock {
+  background-image: url(/lib/images/icon/clock.png) !important;
+}

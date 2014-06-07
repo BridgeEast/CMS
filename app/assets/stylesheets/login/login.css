@@ -1,0 +1,33 @@
+body{
+	background-image: url("bgimage.jpg");
+  background-size: 100% 100%;
+}
+/*logo的div设置*/
+#logo{
+	padding-top: 50px;
+	padding-left: 50px;
+}
+
+/*登录div的设置*/
+.login{
+	width: 500px;
+	height: 300px;
+	background-color: #D9E8FB;
+	margin-left: auto;
+  box-shadow: 20px 20px 10px #888888;
+	margin-right: auto;
+	border-radius:20px;
+	background-image: url("loginbg.jpg");
+	background-size: 500px 300px;
+}
+hr{
+	width: 100%;
+}
+table{
+	margin: auto;
+}
+
+#footer{
+	padding-top: 50px;
+	padding-left: 40%;
+}

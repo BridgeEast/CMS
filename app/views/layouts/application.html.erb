@@ -13,23 +13,24 @@
     <%= render "layouts/menus" %> 
     <%= render "layouts/tools"%>
   </div>
+ <% end %>
 <script>
     Ext.onReady(function(){ 
         CMS.menuPanel = Ext.create('Ext.Component', {
 		        region: 'north',
-		        border: false,
+		        border: true,
+            frame: true,
 		        height: 30
-            });
-        console.log(CMS.mainPanel)
+        });
+        console.log(2);
       if(CMS.mainPanel){ 
             Ext.create('Ext.container.Viewport', {
 			          layout: 'border',
+                autoScroll: true,
 			          items: [CMS.menuPanel, CMS.mainPanel],
             })
         }
-    })
+    });
  </script>
- <% end %>
-
 </body>
 </html>

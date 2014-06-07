@@ -1,5 +1,5 @@
-教室信息（教室编号、最大容量、多媒体设备）
-课程信息（任课教师、选课人数、是否要求使用多媒体）
-任课教师（编号、姓名）
-报告会通知（时间、教室信息、人数、多媒体）
-课表（教室信息、课程信息、上课时间）
+教室信息（教室编号(number)、地址(address)、最大容量(contain)、多媒体设备(multimedia)、备注(remark)）
+课程信息（课程代号(number)、课程名称(name)、任课教师(teacher_id)、选课人数(quantity)、是否要求使用多媒体(multimedia)、备注(remark)）
+任课教师（编号(number)、姓名(name)、联系方式(phone)、邮箱(email)）
+报告会通知（时间(time)、教室信息(class_info_id)、人数(quantity)、多媒体(multimedia)）
+课表（教室信息(class_info_id)、课程信息(course_id)、时间（起始周(week_s)、结束周(week_e)、星期(week)、节(hour)）)

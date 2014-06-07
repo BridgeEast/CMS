@@ -11,28 +11,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604012554) do
+ActiveRecord::Schema.define(version: 20140607130219) do
 
   create_table "class_infos", force: true do |t|
     t.string   "number"
+    t.string   "address"
     t.integer  "contain"
     t.boolean  "multimedia", default: true
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "class_tables", force: true do |t|
+    t.integer  "class_info_id"
+    t.integer  "course_id"
+    t.string   "week"
+    t.string   "date"
+    t.string   "hour"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "courses", force: true do |t|
+    t.string   "number"
+    t.string   "name"
     t.integer  "teacher_id"
     t.integer  "quantity"
     t.boolean  "multimedia"
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+  end
+
+  create_table "notices", force: true do |t|
+    t.integer  "class_info_id"
+    t.integer  "quantity"
+    t.boolean  "multimedia"
+    t.string   "week"
+    t.string   "date"
+    t.string   "hour"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "teachers", force: true do |t|
     t.string   "number"
     t.string   "name"
+    t.string   "phone"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

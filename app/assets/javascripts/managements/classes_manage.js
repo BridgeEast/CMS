@@ -12,17 +12,24 @@ classesManage = {
             text: '教室编号',
             dataIndex: 'number'
         }, { 
+            text: '地址',
+            dataIndex: 'address'
+        }, { 
             text: '最大容量',
             dataIndex: 'contain'
         }, { 
             text: '多媒体设备',
             dataIndex: 'multimedia'
+        }, { 
+            text: '备注',
+            dataIndex: 'remark'
         }];
 
         var gridTbar = Ext.create('Ext.toolbar.Toolbar', { 
             items: [{ 
                 text: '删除',
                 scope: this,
+                iconCls: Wando.icons.deletes,
                 handler: function(){ 
                     Ext.Msg.confirm('提示', "确定要删除？", function(btn){ 
                         if(btn=='yes'){ 
@@ -35,7 +42,7 @@ classesManage = {
 
         var store = Ext.create('Ext.data.Store', {
             autoLoad: true,
-            fields: ['id', 'number', 'contain', 'multimedia'],
+            fields: ['id', 'address', 'number', 'contain', 'multimedia', 'remark'],
             proxy: {
                 type: 'ajax',
                 url: '/managements/get_classes_for_grid.json',
@@ -47,7 +54,7 @@ classesManage = {
         });
 
         return Ext.create('Ext.grid.Panel', { 
-            anchor: '100% 65%',
+            anchor: '100% 75%',
             columns: cm,
             store: store,
             id: 'classGrid',
@@ -63,6 +70,7 @@ classesManage = {
             items: [{ 
                 text: '添加',
                 scope: this,
+                iconCls: Wando.icons.add,
                 handler: function(){ 
                     var form = Ext.getCmp('classForm').getForm();
                     if(form.isValid()){ 
@@ -74,7 +82,7 @@ classesManage = {
             }]
         });
         return Ext.create('Ext.form.Panel', { 
-            anchor: '100% 35%',
+            anchor: '100% 25%',
             title: '教室信息',
             frame: true,
             id: 'classForm',
@@ -95,7 +103,7 @@ classesManage = {
             xtype: 'fieldcontainer',
             layout: 'column',
             defaults: { 
-                columnWidth: .33,
+                columnWidth: .2,
                 xtype: 'textfield',
                 labelAlign: 'right'
             },
@@ -108,6 +116,9 @@ classesManage = {
                 name: 'contain',
                 allowBlank: false,
             }, { 
+                fieldLabel: '地址',
+                name: 'address'
+            }, { 
                 fieldLabel: '多媒体设备',
                 name: 'multimedia',
                 allowBlank: false,
@@ -115,6 +126,10 @@ classesManage = {
                 store: this.createFormStore(),
                 valueField: 'value',
                 displayField: 'display'
+            }, { 
+                fieldLabel: '备注',
+                xtype: 'textarea',
+                name: 'remark'
             }]
         }
     },

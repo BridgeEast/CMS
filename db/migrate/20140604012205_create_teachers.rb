@@ -4,6 +4,8 @@ class CreateTeachers < ActiveRecord::Migration
 
       t.string :number
       t.string :name
+      t.string :phone
+      t.string :email
       t.timestamps
     end
   end

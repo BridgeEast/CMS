@@ -8,10 +8,10 @@ courseManage = {
     },
     
     createGrid: function(){ 
-        var cm = [/*{ 
-            text: '教室编号',
+        var cm = [{ 
+            text: '课程代号',
             dataIndex: 'number'
-        },*/ { 
+        }, { 
             text: '课程名称',
             dataIndex: 'name'
         }, { 
@@ -21,8 +21,11 @@ courseManage = {
             text: '选课人数',
             dataIndex: 'quantity'
         }, { 
-            text: '多媒体设备',
+            text: '要求使用多媒体设备',
             dataIndex: 'multimedia'
+        }, { 
+            text: '备注',
+            dataIndex: 'remark'
         }];
 
         var gridTbar = Ext.create('Ext.toolbar.Toolbar', { 
@@ -37,7 +40,7 @@ courseManage = {
 
         var store = Ext.create('Ext.data.Store', {
             autoLoad: true,
-            fields: ['id', 'name', 'teacher', 'quantity', 'multimedia'],
+            fields: ['id', 'number', 'name', 'teacher', 'quantity', 'multimedia', 'remark'],
             proxy: {
                 type: 'ajax',
                 url: '/managements/get_course_for_grid.json',
@@ -49,7 +52,7 @@ courseManage = {
         });
 
         return Ext.create('Ext.grid.Panel', { 
-            anchor: '100% 65%',
+            anchor: '100% 75%',
             columns: cm,
             store: store,
             id: 'courseGrid',
@@ -76,7 +79,7 @@ courseManage = {
             }]
         });
         return Ext.create('Ext.form.Panel', { 
-            anchor: '100% 35%',
+            anchor: '100% 25%',
             title: '课程信息',
             frame: true,
             id: 'courseForm',
@@ -85,30 +88,68 @@ courseManage = {
         })
     },
 
+    createTStore: function(){ 
+        return Ext.create('Ext.data.Store', { 
+            autoLoad: true,
+            fields: ['id', 'name'],
+            proxy: { 
+                type: 'ajax',
+                url: '/managements/get_teacher_info.json',
+                reader: { 
+                    type: 'json',
+                    root: 'result'
+                }
+            }
+        });
+    },
+
+    createMMStore: function(){ 
+        return Ext.create('Ext.data.Store', { 
+            fields: ['value', 'display'],
+            data: [{ value: 'true', display: '是' }, { value: 'false', display: '否' }]
+        })
+    },
+
     createFormItem: function(){ 
         return { 
             xtype: 'fieldcontainer',
             layout: 'column',
             defaults: { 
-                columnWidth: .25,
+                columnWidth: .16,
                 xtype: 'textfield',
                 labelAlign: 'right',
                 allowBlank: false
             },
-            items: [/*{ 
-                fieldLabel: '教室编号'
-            },*/ { 
+            items: [{ 
+                fieldLabel: '课程代号',
+                name: 'number',
+                allowBlank: false
+            }, { 
                 fieldLabel: '课程名称',
-                name: 'name'
+                name: 'name',
+                allowBlank: false
             }, { 
                 fieldLabel: '任课老师',
-                name: 'teacher_id'
+                name: 'teacher_id',
+                allowBlank: false,
+                xtype: 'combo',
+                valueField: 'id',
+                displayField: 'name',
+                store: this.createTStore()
             }, { 
                 fieldLabel: '选课人数',
                 name: 'quantity'
             }, { 
                 fieldLabel: '多媒体设备',
-                name: 'multimedia'
+                name: 'multimedia',
+                xtype: 'combo',
+                displayField: 'display',
+                valueField: 'value',
+                store: this.createMMStore()
+            }, { 
+                fieldLabel: '备注',
+                name: 'remark',
+                xtype: 'textarea'
             }]
         }
     },
