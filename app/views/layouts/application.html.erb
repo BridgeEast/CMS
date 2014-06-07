@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Depot</title>
+  <title>CMS</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if current_user %>
-  <%= render "layouts/menus"%> |
-  <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-  <%= link_to('修改密码', edit_registration_path(:user)) %>
-  <br/>
-  <script>
-    Ext.onReady(function(){
-    });
-  </script>
-<% end %>
 <%= yield %>
+<% if current_user %>
+  <div>
+    <%= render "layouts/menus" %> 
+    <%= render "layouts/tools"%>
+  </div>
+<script>
+    Ext.onReady(function(){ 
+        CMS.menuPanel = Ext.create('Ext.Component', {
+		        region: 'north',
+		        border: false,
+		        height: 30
+            });
+        console.log(CMS.mainPanel)
+      if(CMS.mainPanel){ 
+            Ext.create('Ext.container.Viewport', {
+			          layout: 'border',
+			          items: [CMS.menuPanel, CMS.mainPanel],
+            })
+        }
+    })
+ </script>
+ <% end %>
 
 </body>
 </html>

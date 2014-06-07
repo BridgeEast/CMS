@@ -1,0 +1,160 @@
+classesManage = { 
+    init: function(){ 
+        CMS.mainPanel = Ext.create('Ext.panel.Panel', { 
+            region: 'center',
+            layout: 'anchor',
+            items: [this.createForm(), this.createGrid()]
+        });
+    },
+    
+    createGrid: function(){ 
+        var cm = [{ 
+            text: '教室编号',
+            dataIndex: 'number'
+        }, { 
+            text: '最大容量',
+            dataIndex: 'contain'
+        }, { 
+            text: '多媒体设备',
+            dataIndex: 'multimedia'
+        }];
+
+        var gridTbar = Ext.create('Ext.toolbar.Toolbar', { 
+            items: [{ 
+                text: '删除',
+                scope: this,
+                handler: function(){ 
+                    Ext.Msg.confirm('提示', "确定要删除？", function(btn){ 
+                        if(btn=='yes'){ 
+                            this.deleteClass();                        
+                        }
+                    }, this);
+                }
+            }]
+        });
+
+        var store = Ext.create('Ext.data.Store', {
+            autoLoad: true,
+            fields: ['id', 'number', 'contain', 'multimedia'],
+            proxy: {
+                type: 'ajax',
+                url: '/managements/get_classes_for_grid.json',
+                reader: {
+                    type: 'json',
+                    root: 'result'
+                }
+            }
+        });
+
+        return Ext.create('Ext.grid.Panel', { 
+            anchor: '100% 65%',
+            columns: cm,
+            store: store,
+            id: 'classGrid',
+            autoScroll: true,
+            tbar: gridTbar,
+            forceFit: true,
+            title: '教室列表'
+        });
+    },
+
+    createForm: function(){ 
+        var formTbar = Ext.create('Ext.toolbar.Toolbar', { 
+            items: [{ 
+                text: '添加',
+                scope: this,
+                handler: function(){ 
+                    var form = Ext.getCmp('classForm').getForm();
+                    if(form.isValid()){ 
+                        this.newClass();
+                    }else{ 
+                        Ext.Msg.alert('警告', "请输入完整的信息");
+                    }
+                }
+            }]
+        });
+        return Ext.create('Ext.form.Panel', { 
+            anchor: '100% 35%',
+            title: '教室信息',
+            frame: true,
+            id: 'classForm',
+            tbar: formTbar,
+            items: [this.createFormItem()]
+        })
+    },
+
+    createFormStore: function(){ 
+        return Ext.create('Ext.data.Store', { 
+            fields: ['value', 'display'],
+            data: [{ value: 'true', display: '是' }, { value: 'false', display: '否' }]
+        })
+    },
+
+    createFormItem: function(){ 
+        return { 
+            xtype: 'fieldcontainer',
+            layout: 'column',
+            defaults: { 
+                columnWidth: .33,
+                xtype: 'textfield',
+                labelAlign: 'right'
+            },
+            items: [{ 
+                fieldLabel: '教室编号',
+                name: 'number',
+                allowBlank: false,
+            }, { 
+                fieldLabel: '最大容量',
+                name: 'contain',
+                allowBlank: false,
+            }, { 
+                fieldLabel: '多媒体设备',
+                name: 'multimedia',
+                allowBlank: false,
+                xtype: 'combo',
+                store: this.createFormStore(),
+                valueField: 'value',
+                displayField: 'display'
+            }]
+        }
+    },
+
+    newClass: function(){ 
+        var classInfo = Ext.getCmp('classForm').getValues();
+        Ext.Ajax.request({ 
+            url: '/managements/add_class_info.json',
+            method: 'post',
+            jsonData: { class_info: classInfo },
+            success: function(){ 
+                Ext.Msg.alert('提示', "添加成功");
+                Ext.getCmp('classGrid').store.reload();
+                Ext.getCmp('classForm').getForm().reset();
+            },
+            failure: function(){ 
+                Ext.Msg.alert('提示', "添加失败");
+            }
+        })
+    },
+
+    deleteClass: function(){ 
+        var grid = Ext.getCmp('classGrid');
+        var sel = grid.getSelectionModel().getSelection()[0];
+        Ext.Ajax.request({ 
+            url: '/managements/delete_class.json',
+            method: 'post',
+            jsonData: { 
+                id: sel.data.id
+            },
+            success: function(){ 
+                Ext.Msg.alert('提示', "删除成功");
+                grid.store.remove(sel);
+            },
+            failure: function(){ 
+                Ext.Msg.alert('提示', "删除失败");
+            }
+        })
+    }
+    
+}
+
+

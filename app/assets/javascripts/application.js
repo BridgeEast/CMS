@@ -17,3 +17,4 @@
 //= require menus/hoverIntent
 //= require menus/superfish
 //= require menus/index
+//= require_tree .

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'informations/classes_info'
+
   get 'homes/index'
 
   devise_for :users
@@ -32,6 +34,14 @@ Rails.application.routes.draw do
   resources :managements do
     collection do
       get 'classes_manage'
+      get 'course_manage'
+      get 'get_classes_for_grid'
+      post 'add_class_info'
+      post 'delete_class'
+      get 'get_course_for_grid'
+      post 'create_course'
+      post 'delete_course'
+      get 'table_manage'
     end
   end
 

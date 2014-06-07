@@ -1,0 +1,11 @@
+<nav id='tools_nav'>
+	<ul class="clear">
+        <li id="tools_li">
+          <a>当前用户：<%=current_user.email%></a>
+        	<dl class="tools_dl">
+            <dd class="tools_dd"><%= link_to('修改密码', edit_registration_path(:user)) %></dd>
+            <dd class="tools_dd"><%= link_to('退出系统', destroy_user_session_path, :method => :delete) %></dd>
+          </dl>
+        </li>
+    </ul>
+</nav>
