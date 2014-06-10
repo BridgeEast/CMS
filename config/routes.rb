@@ -51,6 +51,10 @@ Rails.application.routes.draw do
     collection do
       get 'classes_info'
       get 'course_info'
+      get 'query_class_info'
+      post 'query_class_info'
+      get 'query_course'
+      post 'query_course'
     end
   end
 

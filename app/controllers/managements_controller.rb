@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ManagementsController < ApplicationController
   def classes_manage
   end
