@@ -6,7 +6,7 @@ class CreateClassTables < ActiveRecord::Migration
       t.integer :course_id
       t.string :week_s
       t.string :week_e
-      t.string :week
+      t.string :date
       t.string :hour
       t.timestamps
     end

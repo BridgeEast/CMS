@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+
+multimedia:
+  true:: '是'
+  false: '否'

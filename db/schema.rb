@@ -26,7 +26,8 @@ ActiveRecord::Schema.define(version: 20140607130219) do
   create_table "class_tables", force: true do |t|
     t.integer  "class_info_id"
     t.integer  "course_id"
-    t.string   "week"
+    t.string   "week_s"
+    t.string   "week_e"
     t.string   "date"
     t.string   "hour"
     t.datetime "created_at"

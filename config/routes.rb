@@ -41,7 +41,9 @@ Rails.application.routes.draw do
       post 'delete_course'
       get 'table_manage'
       get 'get_teacher_info'
-      get 'get_course_table_for_grid'
+      get 'get_class_table_for_grid'
+      post 'create_class_table'
+      post 'delete_class_table'
     end
   end
 
