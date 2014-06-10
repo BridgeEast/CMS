@@ -24,8 +24,8 @@ class ManagementsController < ApplicationController
   end
 
   def get_course_for_grid
-    result = Course.all.collect do |item| 
-      { 
+    result = Course.all.collect do |item|
+      {
         :id => item.id,
         :number => item.number,
         :name => item.name,
@@ -57,18 +57,31 @@ class ManagementsController < ApplicationController
     end
   end
 
-  def get_course_table_for_grid
-    result = ClassTable.all.collect do |item| 
-      { 
+  def get_class_table_for_grid
+    result = ClassTable.all.collect do |item|
+      {
         :id => item.id,
-        :time => item.week + ' ' + item.date + ' ' + item.hour,
+        :number => item.class_info.number,
+        :name => item.course.name,
+        :time => item.week_s + '-' + item.week_e+ '周 ' + item.date + ' ' + item.hour,
         :teacher => item.course.teacher.try(:name),
-        :quantity => item.quantity,
+        :quantity => item.course.quantity,
         :multimedia => item.course.multimedia,
       }
     end
     respond_to do |format|
       format.json{ render :json => { :result => result } }
     end
+  end
+
+  def create_class_table
+    params.permit!
+    ClassTable.create!(params[:table])
+    render :json => {}
+  end
+
+  def delete_class_table
+    ClassTable.find(params[:id]).destroy
+    render :json => {}
   end
 end
