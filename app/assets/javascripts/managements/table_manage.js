@@ -56,7 +56,7 @@ tableManage = {
             id: 'courseGrid',
             tbar: gridTbar,
             forceFit: true,
-            title: '课表'
+            title: '课程安排记录'
         });
     },
 
@@ -134,7 +134,8 @@ tableManage = {
             fields: ['hour'],
             data: [{ hour:'1' }, { hour:'2' }, { hour:'3' }, { hour:'4' }, { hour:'5' }, { hour:'6' }, { hour:'7' }, { hour:'8' }, { hour:'9' }, { hour:'10'}]
         });
-        var grid = Ext.create('Ext.grid.Panel', { 
+        var grid = Ext.create('Ext.grid.Panel', {
+            id: 'hourGrid',
             columns: [{ 
                 text: '节次',
                 dataIndex: 'hour'
@@ -149,6 +150,7 @@ tableManage = {
                 iconCls: Wando.icons.check,
                 scope: this,
                 handler: function(){ 
+                    this.selectHour();
                 }
             }] 
         });
@@ -161,6 +163,16 @@ tableManage = {
             items: [grid],
             tbar: tbar
         });
+    },
+
+    selectHour: function(){ 
+        var grid = Ext.getCmp('hourGrid');
+        var sell = [];
+        grid.getSelectionModel().getSelection().forEach(function(sel){ 
+            sell.push(sel.data.hour);
+        })
+        console.log(sell);
+        Ext.getCmp('hour').setValue(Ext.encode(sell));
     },
 
     createFormItem: function(){ 
@@ -198,13 +210,9 @@ tableManage = {
                 store: this.createWeek()
             }, { 
                 fieldLabel: '星期',
-                xtype: 'textfield',
-                id: 'week',
-                emptyText: "请选择",
-                    listeners: { 
-                    scope: this,
-                    focus: function(){ this.createDate().show() }
-                }
+                displayField: 'date',
+                valueField: 'date',
+                store: this.createDate()
             }, { 
                 fieldLabel: '节次',
                 xtype: 'textfield',

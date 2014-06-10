@@ -13,13 +13,13 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <table class="f12">
         <tr>
-          <td><%= f.label :email %></td>
+          <td><%= f.label :邮箱 %></td>
           <td><%= f.email_field :email, autofocus: true %></td>
         </tr>
         <tr>&nbsp;</tr>
         <tr>&nbsp;</tr>
         <tr>
-          <td><%= f.label :password %></td>
+          <td><%= f.label :密码 %></td>
           <td><%= f.password_field :password, autocomplete: "off" %></td>
         </tr>
         <tr>&nbsp;</tr>
