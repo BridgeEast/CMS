@@ -38,6 +38,8 @@ courseInfo= {
                 name: 'teacher'
             }, {
                 fieldLabel: '选课人数',
+                xtype: 'numberfield',
+                minValue: 0,
                 name: 'quantity'
             }]
         }, {

@@ -34,7 +34,11 @@ tableManage = {
                 scope: this,
                 iconCls: Wando.icons.deletes,
                 handler: function(){
-                    this.deleteCourse();
+                    Wando.msg.confirm('确定', "确定要删除?", function(btn){ 
+                        if(btn=="ok"){ 
+                            this.deleteCourse();
+                        }   
+                    }, this);
                 }
             }]
         });
@@ -74,7 +78,7 @@ tableManage = {
                     if(form.isValid()){
                         this.addTable();
                     }else{
-                        Ext.Msg.alert('警告', '请把数据填写完整');
+                        Wando.msg.warning('警告', '请把数据填写完整');
                     }
                 }
             }]
@@ -252,12 +256,12 @@ tableManage = {
                 table: value
             },
             success: function(){
-                Ext.Msg.alert('提示', "创建成功");
+                Wando.msg.info('提示', "创建成功");
                 Ext.getCmp('tableForm').getForm().reset();
                 Ext.getCmp('tableGrid').store.reload();
             },
             failure: function(){
-                Ext.Msg.alert('提示', "创建失败");
+                Wando.msg.error('提示', "创建失败");
             }
         })
     },
@@ -272,11 +276,11 @@ tableManage = {
                 id: sel.data.id
             },
             success: function(){
-                Ext.Msg.alert('提示', "删除成功");
+                Wando.msg.info('提示', "删除成功");
                 grid.store.remove(sel);
             },
             failure: function(){
-                Ext.Msg.alert('提示', "删除失败");
+                Wando.msg.error('提示', "删除失败");
             }
         })
     }

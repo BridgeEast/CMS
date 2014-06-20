@@ -76,7 +76,7 @@ classesManage = {
                     if(form.isValid()){
                         this.newClass();
                     }else{
-                        Ext.Msg.alert('警告', "请输入完整的信息");
+                        Wando.msg.warning('警告', "请输入完整、正确类型的信息");
                     }
                 }
             }]
@@ -115,6 +115,8 @@ classesManage = {
             }, {
                 fieldLabel: '最大容量',
                 name: 'contain',
+                xtype: 'numberfield',
+                minValue: 0,
                 allowBlank: false,
             }, {
                 fieldLabel: '地址',
@@ -142,12 +144,12 @@ classesManage = {
             method: 'post',
             jsonData: { class_info: classInfo },
             success: function(){
-                Ext.Msg.alert('提示', "添加成功");
+                Wando.msg.info('提示', "添加成功");
                 Ext.getCmp('classGrid').store.reload();
                 Ext.getCmp('classForm').getForm().reset();
             },
             failure: function(){
-                Ext.Msg.alert('提示', "添加失败");
+                Wando.msg.error('提示', "添加失败");
             }
         })
     },
@@ -162,11 +164,11 @@ classesManage = {
                 id: sel.data.id
             },
             success: function(){
-                Ext.Msg.alert('提示', "删除成功");
+                Wando.msg.info('提示', "删除成功");
                 grid.store.remove(sel);
             },
             failure: function(){
-                Ext.Msg.alert('提示', "删除失败");
+                Wando.msg.error('提示', "删除失败");
             }
         })
     }

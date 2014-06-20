@@ -24,6 +24,8 @@ classesInfo = {
             name: 'address'
         }, {
             fieldLabel: '最大容量',
+            xtype: 'numberfield',
+            minValue: 0,
             name: 'contain'
         }, {
             fieldLabel: '多媒体设备',

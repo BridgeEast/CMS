@@ -1,0 +1,31 @@
+/**
+ *@info信息提示
+ */
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:fixed;
+    left: 77%;
+    top:25px;
+    width:300px;
+    z-index:200000;
+}
+#msg-div .msg {
+    border-radius: 3px;
+    -moz-border-radius: 8px;
+    background: #63B8FF;
+    border: 0px solid #ccc;
+    margin-top: 4px;
+    padding: 10px 15px;
+    color: #FFFFFF;
+}
+#msg-div .msg h3 {
+    margin: 0 0 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+#msg-div .msg p {
+    margin: 0;
+    font-size: 14px;
+}
